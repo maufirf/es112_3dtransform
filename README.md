@@ -44,26 +44,6 @@ The code block below initially intended to make the Matplotlib's `Axes3D` figure
 #https://github.com/EmilienDupont/augmented-neural-odes/issues/7
 ```
 
-To create the rotation matrix, we need to follow this formula we often refer as Rodriguez' formula:<br/>
-_R(n̂,θ) = I₃ + sin(θ)\[n̂\]ₓ + (1-cos(θ))\[n̂\]ₓ²_
-
-After that, we simply just operate the resulting matrix to the points. I did it twice: the points inside and on the cube and the outlines of the cube
-
-```python
-# Axis/angle exponential twist
-# R(n̂,θ) = I + sin(θ)[n̂]_× + (1-cos(θ))[n̂]_×²
-ax = np.identity(3) + np.sin(theta)*nhat_cpo + (1-np.cos(theta))*(nhat_cpo@nhat_cpo)
-
-#ax_batch = np.array(list(ax for _ in range(len(cube_orig))))
-#ax_batch_line = np.array(list(ax for _ in range(len(cube_orig_line))))
-
-cube_axang = np.dot(ax,cube_orig.T).T
-cube_axang_x, cube_axang_y, cube_axang_z = zip(*cube_axang)
-
-cube_axang_line = np.dot(ax,cube_orig_line.T).T
-cube_axang_line_x, cube_axang_line_y, cube_axang_line_z = zip(*cube_axang_line)
-```
-
 Different from the 2D transformation, I have to use three dimensional model to play with instead of image. My colleague did this task with an image anyway by augmenting the coordinates so it is usable in 3D space. I decided that I want to simulate rotations using cube that is centered in the default anchor point, which is (0,0,0). So I made a helper function to generate all coordinates of the cube i desire. Those points will be plotted to `Axes3D` by using their `scatter` method, they will be blue and transparent points. I also generate lines to describe the outlines of the cube that will be plotted using `Axes3D`'s `plot` method, they will be red and opaque points.
 
 ```python
