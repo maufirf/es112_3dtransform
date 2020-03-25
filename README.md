@@ -1,4 +1,4 @@
-_The code is in `transform_2d.ipynb`, you will need Jupyter Notebook to open it. This `README.md` is a non-interactive copy of the notebook._
+_The code is in `transform_3d.ipynb`, you will need Jupyter Notebook to open it. This `README.md` is a non-interactive copy of the notebook._
 
 <b><i>
     Muhammad Aufi Rayesa Frandahana<br/>
